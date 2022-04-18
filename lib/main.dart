@@ -38,6 +38,7 @@ class YuhmPageView extends StatelessWidget {
     final _imageKey3 = GlobalKey<ImagePainterState>();
 
     return PageView(
+      physics: const NeverScrollableScrollPhysics(),
       controller: BlocProvider.of<AppPageViewCubit>(context).pageController,
       children: [
         const HomePage(),

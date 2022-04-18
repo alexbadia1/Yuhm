@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:yuhm/logic/logic.dart';
 
 class QrScanner extends StatelessWidget {
   const QrScanner({Key? key}) : super(key: key);
@@ -10,7 +11,20 @@ class QrScanner extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mobile Scanner'),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.chevron_left,
+              color: Colors.black,
+          ),
+          onPressed: () {
+            BlocProvider.of<AppPageViewCubit>(context).jumpToHomePage();
+          },
+        ),
+        backgroundColor: Colors.deepOrangeAccent,
+        title: const Text(
+          'Looking for QR Code...',
+          style: TextStyle(color: Colors.black),
+        ),
         actions: [
           IconButton(
             color: Colors.white,
@@ -35,9 +49,9 @@ class QrScanner extends StatelessWidget {
               builder: (context, state, child) {
                 switch (state as CameraFacing) {
                   case CameraFacing.front:
-                    return const Icon(Icons.camera_front);
+                    return const Icon(Icons.camera_front, color: Colors.black);
                   case CameraFacing.back:
-                    return const Icon(Icons.camera_rear);
+                    return const Icon(Icons.camera_rear, color: Colors.black);
                 }
               },
             ),
