@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:yuhm/logic/logic.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 
 class QrScanner extends StatelessWidget {
   const QrScanner({Key? key}) : super(key: key);

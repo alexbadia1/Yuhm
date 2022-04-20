@@ -754,7 +754,7 @@ class ImagePainterState extends State<ImagePainter> {
   }
 }
 
-/// Gives access to manipulate the essential components like [strokeWidth], [Color] and [PaintMode].
+/// Gives access to manipulate the essential presentation.components like [strokeWidth], [Color] and [PaintMode].
 @immutable
 class Controller {
   /// Tracks [strokeWidth] of the [Paint] method.

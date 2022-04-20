@@ -1,5 +1,5 @@
 /// Flutters way of cleaning up long lists of imports...
-library pages;
+library presentation.pages;
 
 /// Opening screen where the user is prompted to scan for a QR code at the
 /// restaurant. This will bring them to the restaurant page, where they can

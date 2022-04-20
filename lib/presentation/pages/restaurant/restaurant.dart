@@ -3,7 +3,7 @@ library restaurant;
 
 /// Presentation
 ///
-/// Base view of the restaurant page containing all components and what not.
+/// Base view of the restaurant page containing all presentation.components and what not.
 export 'restaurant_page.dart';
 
 /// Components
@@ -20,3 +20,6 @@ export 'menu_section_card.dart';
 /// It has a name, a brief description, and an image for the special, promo, or
 /// deal of some sort.
 export 'menu_special_card.dart';
+
+
+export 'menu_sections.dart';

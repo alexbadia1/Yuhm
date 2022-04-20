@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:book_painter/book_painter.dart';
 import 'package:yuhm/logic/logic.dart';
+import 'package:book_painter/book_painter.dart';
 
 /// An interactive restaurant menu, where the user can just circle what they
 /// want from the menu. Perhaps add underlines, strikeouts, and other markings

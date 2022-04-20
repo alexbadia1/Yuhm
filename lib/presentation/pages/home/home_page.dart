@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yuhm/components/components.dart';
 import 'package:yuhm/logic/logic.dart';
+import 'package:yuhm/presentation/presentation.dart';
 
 /// Opening screen where the user is prompted to scan for a QR code at the
 /// restaurant. This will bring them to the restaurant page, where they can

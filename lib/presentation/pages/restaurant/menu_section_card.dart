@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yuhm/constants.dart';
-import 'package:yuhm/components/components.dart';
+import 'package:yuhm/presentation/presentation.dart';
 
 /// Card containing a specific section of the menu (i.e. "Appetizers"). It has
 /// a name and a brief description for the menu section.
@@ -26,16 +25,16 @@ class MenuSectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
     return Container(
       /// Borders, outlines, shadows, margins, padding, etc.
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.symmetric(vertical: kFontSizeBase * .75, horizontal: kFontSizeBase * 2),
+      margin: EdgeInsets.only(bottom: size.height * .015),
       width: size.width * .85,
-      decoration: BoxDecoration(
+      decoration: ShapeDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
+        shape: const StadiumBorder(),
+        shadows: [
           BoxShadow(
             offset: const Offset(0, 10),
             blurRadius: 33,
@@ -50,11 +49,17 @@ class MenuSectionCard extends StatelessWidget {
           name,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
+          style: const TextStyle(
+            fontSize: kFontSizeLarge,
+          ),
         ),
         description: Text(
           description,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
+          style: const TextStyle(
+            fontSize: kFontSizeBase,
+          ),
         ),
         trailing: IconButton(
           icon: const Icon(Icons.chevron_right),

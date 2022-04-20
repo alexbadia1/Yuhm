@@ -1,8 +1,7 @@
-import 'package:book_painter/book_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:yuhm/logic/logic.dart';
-import 'package:yuhm/pages/pages.dart';
-import 'package:yuhm/constants.dart';
+import 'package:book_painter/book_painter.dart';
+import 'package:yuhm/presentation/presentation.dart';
 
 void main() => runApp(Yuhm());
 
