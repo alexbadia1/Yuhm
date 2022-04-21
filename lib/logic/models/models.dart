@@ -1,4 +1,4 @@
-library model;
+library models;
 
 export 'menu.dart';
 export 'menu_page.dart';

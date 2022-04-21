@@ -1,5 +1,6 @@
 library logic;
 
-export 'model/menu.dart';
+export 'models/models.dart';
+export 'blocs/blocs.dart';
 export 'cubits/cubits.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
