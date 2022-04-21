@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yuhm/logic/logic.dart';
 
 class CustomTabController extends StatefulWidget {
   final int length;
@@ -11,20 +12,29 @@ class CustomTabController extends StatefulWidget {
 
 class _CustomTabControllerState extends State<CustomTabController>
     with TickerProviderStateMixin {
-  TabController? _tabController;
-
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: widget.length, vsync: this);
+    BlocProvider.of<TabPageSelectorCubit>(context).setTabController(
+      TabController(
+        length: widget.length,
+        vsync: this,
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return TabPageSelector(
-      controller: _tabController,
-      color: Colors.transparent,
-      selectedColor: Colors.grey,
-    );
+    final TabPageSelectorState _state =
+        context.watch<TabPageSelectorCubit>().state;
+
+    if (_state is TabPageSelectorAlive) {
+      return TabPageSelector(
+        controller: _state.tc,
+        color: Colors.transparent,
+        selectedColor: Colors.grey,
+      );
+    }
+    return const SizedBox();
   }
 }

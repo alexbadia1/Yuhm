@@ -28,7 +28,8 @@ class MenuSectionCard extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     return Container(
       /// Borders, outlines, shadows, margins, padding, etc.
-      padding: const EdgeInsets.symmetric(vertical: kFontSizeBase * .75, horizontal: kFontSizeBase * 2),
+      padding: const EdgeInsets.symmetric(
+          vertical: kFontSizeBase * .5, horizontal: kFontSizeBase * 1.5),
       margin: EdgeInsets.only(bottom: size.height * .015),
       width: size.width * .85,
       decoration: ShapeDecoration(
@@ -51,6 +52,7 @@ class MenuSectionCard extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(
             fontSize: kFontSizeLarge,
+            fontWeight: FontWeight.bold,
           ),
         ),
         description: Text(
@@ -59,6 +61,7 @@ class MenuSectionCard extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(
             fontSize: kFontSizeBase,
+            fontStyle: FontStyle.italic,
           ),
         ),
         trailing: IconButton(

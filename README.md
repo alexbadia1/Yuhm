@@ -2,15 +2,13 @@
 
 A fun simple restaurant ordering app
 
-## Getting Started
+## TODO - Restaurant Screen
 
-This project is a starting point for a Flutter application.
+1. Add Bloc functionality to UI
+2. Add mock data for say olive garden and mcdonalds
+3. Work on image editor view
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## After TODO...
+### 1. Work on Menu Screen 
+### 2. Show Chef Order Queue Screen
+### 3. Work on Restaurant Config

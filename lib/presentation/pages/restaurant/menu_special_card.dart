@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:yuhm/presentation/presentation.dart';
 
-enum MenuSpecialType { deal, special, promotion }
+enum MenuSpecialType { deal, dailySpecial, promotion }
+
+extension ParseToString on MenuSpecialType {
+  String humanString() {
+    switch (this) {
+      case MenuSpecialType.deal:
+        return "Deals";
+      case MenuSpecialType.dailySpecial:
+        return "Daily Specials";
+      case MenuSpecialType.promotion:
+        return "Promotions";
+      default:
+        return "Specials";
+    }
+  }
+}
 
 /// Card containing the restaurants daily special, promo, or deals of some sort.
 /// It has a name, a brief description, and an image for the special, promo, or
@@ -17,107 +32,86 @@ class MenuSpecialCard extends StatelessWidget {
   /// A nice image of the promotion, special, or deal.
   final String networkImageSource;
 
-  /// WIs this a promotion, daily special, or some deal?
-  final MenuSpecialType specialType;
-
   const MenuSpecialCard(
       {Key? key,
       required this.name,
       required this.description,
-      required this.specialType,
       required this.networkImageSource})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    final Size _size = MediaQuery.of(context).size;
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        RichText(
-          text: TextSpan(
-            style: Theme.of(context).textTheme.headline5,
-            children: const [
-              TextSpan(
-                text: "Deals ",
+        Expanded(
+          child: Column(
+            children: <Widget>[
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  name,
+                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                        fontSize: kFontSizeXLarge,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
               ),
-              TextSpan(
-                text: "& ",
-              ),
-              TextSpan(
-                text: "Specials...",
-                style: TextStyle(fontWeight: FontWeight.bold),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    height: _size.height * .1,
+                    padding: EdgeInsets.only(top: _size.height * .0125),
+                    child: Text(
+                      capitalize(description),
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: kFontSizeBase,
+                        color: kLightBlackColor,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: _size.height * .005),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      TextButton(
+                        child: const Text(
+                          "Read Menu",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: kFontSizeBase,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        style: TextButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: kFontSizeBase * 1.4),
+                            backgroundColor: Colors.deepOrangeAccent,
+                            shape: const StadiumBorder()),
+                        onPressed: () {},
+                      ),
+                    ],
+                  )
+                ],
               ),
             ],
           ),
         ),
-        const SizedBox(height: 20),
-        Stack(
-          children: <Widget>[
-            const SizedBox(
-              height: 180,
-              width: double.infinity,
+        const Expanded(
+          child: Padding(
+            padding: EdgeInsets.only(top: kFontSizeLarge * .95),
+            child: Image(
+              image: AssetImage('boba_tea.png'),
+              fit: BoxFit.fitWidth,
             ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                padding: const EdgeInsets.only(left: 24, top: 24, right: 150),
-                height: 160,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(29),
-                  color: const Color(0xFFFFF8F9),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    RichText(
-                      text: TextSpan(
-                        style: const TextStyle(color: kBlackColor),
-                        children: [
-                          TextSpan(
-                            text: capitalCase(name),
-                            style: const TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                          TextSpan(
-                            text: capitalize(description),
-                            style: const TextStyle(color: kLightBlackColor),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Row(
-                      children: <Widget>[
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: RoundedButton(
-                            text: "Add to Order",
-                            onPressed: () {
-                              print(
-                                  "menu special, promotion, or deal added to order!");
-                            },
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Positioned(
-              top: 0,
-              right: 0,
-              child: Image.network(
-                networkImageSource,
-                width: 150,
-                fit: BoxFit.fitWidth,
-              ),
-            ),
-          ],
-        )
+          ),
+        ),
       ],
     );
   }

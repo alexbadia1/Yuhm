@@ -26,6 +26,8 @@ class RestaurantInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size _size = MediaQuery.of(context).size;
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -43,45 +45,52 @@ class RestaurantInfoCard extends StatelessWidget {
                       ),
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+              Stack(
+                alignment: AlignmentDirectional.topStart,
                 children: <Widget>[
-                  Container(
-                    height: size.height * .1,
+                  Padding(
                     padding: EdgeInsets.only(top: size.height * .0125),
-                    child: const Text(
-                      "\"We're all family here\" - serving you the best "
-                      "all you can eat bread sticks since 1985.",
-                      maxLines: 5,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: kFontSizeBase,
-                        color: kLightBlackColor,
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                          maxHeight: size.height * .075,
+                      ),
+                      child: Text(
+                        description,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: kFontSizeBase,
+                          color: kLightBlackColor,
+                        ),
                       ),
                     ),
                   ),
-                  SizedBox(height: size.height * .005),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
+                  Column(
                     children: [
-                      TextButton(
-                        child: const Text(
-                          "Read Menu",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: kFontSizeBase,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(horizontal: kFontSizeBase * 1.4),
-                            backgroundColor: Colors.deepOrangeAccent,
-                            shape: const StadiumBorder()),
-                        onPressed: () {},
+                      SizedBox(height: size.height * .075),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          TextButton(
+                            child: const Text(
+                              "Read Menu",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: kFontSizeBase,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            style: TextButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(horizontal: kFontSizeBase * 1.4),
+                                backgroundColor: Colors.deepOrangeAccent,
+                                shape: const StadiumBorder()),
+                            onPressed: () {},
+                          ),
+                        ],
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ],

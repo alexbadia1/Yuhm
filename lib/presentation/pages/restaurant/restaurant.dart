@@ -23,3 +23,5 @@ export 'menu_special_card.dart';
 
 
 export 'menu_sections.dart';
+
+export 'menu_specials.dart';

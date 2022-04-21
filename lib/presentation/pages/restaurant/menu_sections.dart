@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:yuhm/logic/logic.dart';
 import 'package:yuhm/presentation/presentation.dart';
 
-class MenuSections extends StatelessWidget {
-  const MenuSections({Key? key}) : super(key: key);
+class MenuSectionsPageView extends StatelessWidget {
+  const MenuSectionsPageView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,6 @@ class MenuSections extends StatelessWidget {
       // Generate multiple pages in a page view of columns of menu sections.
       List<Widget> pageViewChildren = [];
       for (int i = 0; i < menuSections.length; i += maxItemsInCol) {
-
         // Add 3-4 sections per column...
         List<MenuSectionCard> menuSectionCards = [];
         for (int j = i; j < i + maxItemsInCol && j < menuSections.length; ++j) {
@@ -41,9 +41,44 @@ class MenuSections extends StatelessWidget {
         );
       }
 
-      return PageView(
-        controller: _pg,
-        children: pageViewChildren,
+      return Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Stack(
+              alignment: AlignmentDirectional.topCenter,
+              children: [
+                PageView(
+                  controller: _pg,
+                  children: pageViewChildren,
+                  onPageChanged: (index) {
+                    BlocProvider.of<TabPageSelectorCubit>(context)
+                        .updateIndex(index);
+                  },
+                ),
+                Column(
+                  children: [
+                    pageViewChildren.length > 1
+                        ? Padding(
+                            padding: EdgeInsets.only(
+                              // The Menu Sections are in an Expanded Widget,
+                              // this calculates the size of the expanded widget
+                              // in order to offset the TabPageSelector.
+                              top: _size.height - (_size.height * .68),
+                            ),
+                            child: CustomTabController(
+                              length: pageViewChildren.length,
+                            ),
+                          )
+                        : const SizedBox(),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ],
       );
     });
   }
