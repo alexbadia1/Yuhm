@@ -14,14 +14,14 @@ class MenuPage {
   /// sections, in which multiple sections must be attached to it.
   final List<MenuSection> menuSections;
 
-  MenuPage({
+  const MenuPage({
     this.id,
     this.imageBytes,
     required this.menuSections,
   });
 
-  MenuPage.nullConstructor({
-    this.id,
+  const MenuPage.nullConstructor({
+    this.id = "[Menu Page Id]",
     this.imageBytes,
     this.menuSections = const <MenuSection>[],
   });

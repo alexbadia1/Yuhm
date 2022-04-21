@@ -8,13 +8,13 @@ class MenuSection {
   /// Brief details about what's in this particular section of the menu.
   final String? description;
 
-  MenuSection({
+  const MenuSection({
     this.id,
     required this.name,
     required this.description,
   });
 
-  MenuSection.nullConstructor({
+  const MenuSection.nullConstructor({
     this.id,
     this.name = "[MenuSection Name]",
     this.description = "[MenuSection Description]",

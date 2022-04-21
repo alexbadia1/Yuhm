@@ -30,10 +30,21 @@ class Restaurant {
     required this.menus,
   });
 
+  /// Returns an empty
   Restaurant.nullConstructor({
     this.id,
     this.name = "[Restaurant Name]",
     this.description = "[Restaurant Description]",
+    this.logoUrl = "[Restaurant Logo Url]",
+    this.specials = const <Special>[],
+    this.menus = const <Menu>[],
+  });
+
+  /// Returns a Restaurant instance with mock data
+  Restaurant.MckinneyAndDoyle({
+    this.id = "restaurantId",
+    this.name = "Mckinney & Doyle Cafe",
+    this.description = "Serving Pawling since 1985",
     this.logoUrl = "[Restaurant Logo Url]",
     this.specials = const <Special>[],
     this.menus = const <Menu>[],
