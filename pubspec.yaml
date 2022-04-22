@@ -71,10 +71,14 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - doyle.png
     - mc.png
     - tall_image.png
     - boba_tea.png
-    - doyle.png
+    - classic-cocktails.png
+    - signature-cocktails.png
+    - wine-by-glass.png
+    - beer.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:yuhm/logic/logic.dart';
-import 'package:book_painter/book_painter.dart';
 import 'package:yuhm/presentation/presentation.dart';
 
 void main() => runApp(Yuhm());
@@ -20,7 +19,7 @@ class Yuhm extends StatelessWidget {
       ),
       home: Scaffold(
         body: BlocProvider<RestaurantBloc>(
-          create: (c) => RestaurantBloc(),
+          create: (_) => RestaurantBloc(),
           child: Builder(builder: (_context) {
             return BlocProvider<AppPageViewCubit>(
               create: (_) => AppPageViewCubit(
@@ -37,49 +36,17 @@ class Yuhm extends StatelessWidget {
 
 class YuhmPageView extends StatelessWidget {
   const YuhmPageView({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    final _imageKey1 = GlobalKey<ImagePainterState>();
-    final _imageKey2 = GlobalKey<ImagePainterState>();
-    final _imageKey3 = GlobalKey<ImagePainterState>();
-
     return PageView(
       physics: const NeverScrollableScrollPhysics(),
       controller: BlocProvider.of<AppPageViewCubit>(context).pageController,
-      children: [
-        const HomePage(),
-        const PinPage(),
-        const QrScanner(),
-        const RestaurantPage(),
-        MenuPageView(
-          menuPages: [
-            ImagePainter.asset(
-              "assets/tall_image.png",
-              key: _imageKey1,
-              scalable: true,
-              initialStrokeWidth: 2,
-              initialColor: Colors.green,
-              initialPaintMode: PaintMode.freeStyle,
-            ),
-            ImagePainter.asset(
-              "assets/tall_image.png",
-              key: _imageKey2,
-              scalable: true,
-              initialStrokeWidth: 2,
-              initialColor: Colors.green,
-              initialPaintMode: PaintMode.freeStyle,
-            ),
-            ImagePainter.asset(
-              "assets/tall_image.png",
-              key: _imageKey3,
-              scalable: true,
-              initialStrokeWidth: 2,
-              initialColor: Colors.green,
-              initialPaintMode: PaintMode.freeStyle,
-            ),
-          ],
-        ),
+      children: const [
+        HomePage(),
+        PinPage(),
+        QrScanner(),
+        RestaurantPage(),
+        MenuPageView(),
       ],
     );
   }

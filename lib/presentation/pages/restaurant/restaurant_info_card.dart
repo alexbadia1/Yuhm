@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yuhm/logic/logic.dart';
 import 'package:yuhm/presentation/presentation.dart';
 
 class RestaurantInfoCard extends StatelessWidget {
@@ -52,7 +52,7 @@ class RestaurantInfoCard extends StatelessWidget {
                     padding: EdgeInsets.only(top: size.height * .0125),
                     child: ConstrainedBox(
                       constraints: BoxConstraints(
-                          maxHeight: size.height * .075,
+                        maxHeight: size.height * .075,
                       ),
                       child: Text(
                         description,
@@ -82,10 +82,13 @@ class RestaurantInfoCard extends StatelessWidget {
                                   fontWeight: FontWeight.bold),
                             ),
                             style: TextButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(horizontal: kFontSizeBase * 1.4),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: kFontSizeBase * 1.4),
                                 backgroundColor: Colors.deepOrangeAccent,
                                 shape: const StadiumBorder()),
-                            onPressed: () {},
+                            onPressed: () =>
+                                BlocProvider.of<AppPageViewCubit>(context)
+                                    .jumpToMenuPage(),
                           ),
                         ],
                       ),
@@ -96,11 +99,11 @@ class RestaurantInfoCard extends StatelessWidget {
             ],
           ),
         ),
-        const Expanded(
+        Expanded(
           child: Padding(
-            padding: EdgeInsets.only(top: kFontSizeLarge * .95),
+            padding: const EdgeInsets.only(top: kFontSizeLarge * .95),
             child: Image(
-              image: AssetImage('mc.png'),
+              image: AssetImage(networkImageSource),
               fit: BoxFit.fitWidth,
             ),
           ),

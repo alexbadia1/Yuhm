@@ -1,4 +1,6 @@
-class MenuSection {
+import 'package:yuhm/logic/logic.dart';
+
+class MenuSection extends Equatable{
   /// Database PK.
   final String? id;
 
@@ -36,4 +38,7 @@ class MenuSection {
         "\tDescription: $description\n"
         "}\n";
   }
+
+  @override
+  List<Object?> get props => [id, name, description];
 }

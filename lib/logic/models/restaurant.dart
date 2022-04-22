@@ -44,9 +44,14 @@ class Restaurant {
   Restaurant.MckinneyAndDoyle({
     this.id = "restaurantId",
     this.name = "Mckinney & Doyle Cafe",
-    this.description = "Serving Pawling since 1985",
-    this.logoUrl = "[Restaurant Logo Url]",
-    this.specials = const <Special>[],
+    this.description =
+        "Serving Pawling since 1985, we're committed to excellence.",
+    this.logoUrl = "doyle.png",
+    this.specials = const <Special>[
+      Special.nullConstructor(),
+      Special.nullConstructor(),
+      Special.nullConstructor(),
+    ],
     this.menus = const <Menu>[],
   });
 

@@ -11,22 +11,20 @@ class RestaurantPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery
-        .of(context)
-        .size;
+    final Size _size = MediaQuery.of(context).size;
     final double _headerSize = _size.height * .3;
     final double _footerSize = _size.height * .3;
     final _realHeight = MediaQuery.of(context).size.height -
         MediaQuery.of(context).padding.top -
         MediaQuery.of(context).padding.bottom +
         MediaQuery.of(context).viewInsets.bottom;
+
     return Scaffold(
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-
             /// Layering a cool background behind the Restaurant Info and Menu
             /// Sections.
             Stack(
@@ -44,7 +42,6 @@ class RestaurantPage extends StatelessWidget {
                     //   image: AssetImage("assets/images/bg.png"),
                     //   fit: BoxFit.fitWidth,
                     // ),
-                    color: Colors.green,
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(50),
                       bottomRight: Radius.circular(50),
@@ -52,12 +49,19 @@ class RestaurantPage extends StatelessWidget {
                   ),
 
                   /// Details about the Restaurant, menus and what not.
-                  child: RestaurantInfoCard(
-                    size: _size,
-                    name: "McKinney & Doyle Cafe",
-                    description: "A small town restaurant since 1975.",
-                    networkImageSource: "",
-                  ),
+                  child: Builder(builder: (context) {
+                    final RestaurantState _state =
+                        context.watch<RestaurantBloc>().state;
+                    if (_state is RestaurantFetchSuccess) {
+                      return RestaurantInfoCard(
+                        size: _size,
+                        name: _state.restaurant.name,
+                        description: _state.restaurant.description,
+                        networkImageSource: _state.restaurant.logoUrl,
+                      );
+                    }
+                    return const SizedBox();
+                  }),
                 ),
                 SizedBox(
                   height: _realHeight,

@@ -5,28 +5,34 @@ class Special {
   final String? id;
 
   /// Special, promo, deal, etc.
-  final String? name;
+  final String name;
 
   /// Details of special, promo, deal, etc.
-  final String? description;
+  final String description;
 
-  Special({
+  final String networkImageSource;
+
+  const Special({
     this.id,
     required this.name,
     required this.description,
+    required this.networkImageSource,
   });
 
-  Special.nullConstructor({
+  const Special.nullConstructor({
     this.id,
-    this.name = "[Special Name]",
-    this.description = "[Special Description]",
+    this.name = "Boba Tea",
+    this.description = "A cold, frothy drink made with a tea base shaken with "
+        "flavors, milk and tapioca pearls at Fat Straw Required.",
+    this.networkImageSource = "boba_tea.png",
   });
 
-  copyWith({String? id, String? name, String? description}) {
+  copyWith({String? id, String? name, String? description, String? networkImageSource}) {
     return Special(
       id: id ?? this.id,
       name: name ?? this.name,
       description: description ?? this.description,
+      networkImageSource: networkImageSource ?? this.networkImageSource,
     );
   }
 
@@ -36,6 +42,7 @@ class Special {
         "\tDoc Id: $id\n"
         "\tName: $name\n"
         "\tDescription: $description\n"
+        "\tNetwork Image Source: $networkImageSource\n"
         "}\n";
   }
 }

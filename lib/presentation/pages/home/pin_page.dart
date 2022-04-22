@@ -48,67 +48,74 @@ class _PinPageState extends State<PinPage> {
             Positioned(
               left: _size.width * .03,
               top: _size.height * .125,
-              child: IconButton(
-                icon: const Icon(
-                  Icons.chevron_left,
-                  size: 48,
-                ),
-                onPressed: () {
-                  BlocProvider.of<AppPageViewCubit>(context).jumpToHomePage();
-                },
-              ),
-            ),
-            Builder(
-              builder: (context) {
-                final RestaurantState _state = context.watch<RestaurantBloc>().state;
-                if (_state is RestaurantFetching) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      FixedLoadingWidget(
-                        indicator: BallSpinFadeLoaderIndicator(),
-                        size: 55.0,
-                        color: const Color.fromRGBO(255, 255, 255, .50),
-                      ),
-                    ],
+              child: Builder(builder: (context) {
+                final RestaurantState _state =
+                    context.watch<RestaurantBloc>().state;
+                if (_state is! RestaurantFetching) {
+                  return IconButton(
+                    icon: const Icon(
+                      Icons.chevron_left,
+                      size: 48,
+                    ),
+                    onPressed: () {
+                      BlocProvider.of<AppPageViewCubit>(context)
+                          .jumpToHomePage();
+                    },
                   );
                 }
+                return const SizedBox();
+              }),
+            ),
+            Builder(builder: (context) {
+              final RestaurantState _state =
+                  context.watch<RestaurantBloc>().state;
+              if (_state is RestaurantFetching) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 16, horizontal: 30),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * .6,
-                        child: RestaurantPinTextFormField(
-                          formKey: _formKey,
-                          focusNode: _focusNode,
-                          textEditingController: _textEditingController,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * .6,
-                      child: RoundedButton(
-                        text: "Submit",
-                        onPressed: () {
-                          if (!_formKey.currentState!.validate()) {
-                            return;
-                          }
-                          BlocProvider.of<RestaurantBloc>(context).add(
-                            FetchRestaurant(
-                              _textEditingController.text.trim(),
-                            ),
-                          );
-                          FocusScope.of(context).unfocus();
-                        },
-                      ),
+                  children: [
+                    FixedLoadingWidget(
+                      indicator: BallSpinFadeLoaderIndicator(),
+                      size: 55.0,
+                      color: const Color.fromRGBO(255, 255, 255, .50),
                     ),
                   ],
                 );
               }
-            ),
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16, horizontal: 30),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * .6,
+                      child: RestaurantPinTextFormField(
+                        formKey: _formKey,
+                        focusNode: _focusNode,
+                        textEditingController: _textEditingController,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * .6,
+                    child: RoundedButton(
+                      text: "Submit",
+                      onPressed: () {
+                        if (!_formKey.currentState!.validate()) {
+                          return;
+                        }
+                        BlocProvider.of<RestaurantBloc>(context).add(
+                          FetchRestaurant(
+                            _textEditingController.text.trim(),
+                          ),
+                        );
+                        FocusScope.of(context).unfocus();
+                      },
+                    ),
+                  ),
+                ],
+              );
+            }),
           ],
         ),
       ),

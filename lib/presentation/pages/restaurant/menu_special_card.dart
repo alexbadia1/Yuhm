@@ -103,11 +103,11 @@ class MenuSpecialCard extends StatelessWidget {
             ],
           ),
         ),
-        const Expanded(
+        Expanded(
           child: Padding(
-            padding: EdgeInsets.only(top: kFontSizeLarge * .95),
+            padding: const EdgeInsets.only(top: kFontSizeLarge * .95),
             child: Image(
-              image: AssetImage('boba_tea.png'),
+              image: AssetImage(networkImageSource),
               fit: BoxFit.fitWidth,
             ),
           ),

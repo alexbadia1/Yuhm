@@ -34,6 +34,7 @@ class Menu {
     this.description = "Appetizers, entrees, seafood, desserts",
     this.menuPages = const <MenuPage>[
       MenuPage.nullConstructor(
+        imageBytes: "assets/classic-cocktails.png",
         menuSections: [
           MenuSection.nullConstructor(
             name: "Classic Cocktails",
@@ -42,6 +43,7 @@ class Menu {
         ],
       ),
       MenuPage.nullConstructor(
+        imageBytes: "assets/signature-cocktails.png",
         menuSections: [
           MenuSection.nullConstructor(
             name: "Signature Cocktails",
@@ -50,14 +52,16 @@ class Menu {
         ],
       ),
       MenuPage.nullConstructor(
+        imageBytes: "assets/wine-by-glass.png",
         menuSections: [
           MenuSection.nullConstructor(
             name: "Wine By Glass",
-            description: "all fresh house infusions",
+            description: "listed from light spirited to dark",
           ),
         ],
       ),
       MenuPage.nullConstructor(
+        imageBytes: "abeer.png",
         menuSections: [
           MenuSection.nullConstructor(
             name: "Beer",
