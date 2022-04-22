@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:loading_fixed/indicators/fixed_ball_spin_fade_loader_indicator.dart';
+import 'package:loading_fixed/loading.dart';
 import 'package:yuhm/logic/logic.dart';
 import 'package:yuhm/presentation/presentation.dart';
 
-class RestaurantPinPage extends StatefulWidget {
-  const RestaurantPinPage({Key? key}) : super(key: key);
+class PinPage extends StatefulWidget {
+  const PinPage({Key? key}) : super(key: key);
 
   @override
-  State<RestaurantPinPage> createState() => _RestaurantPinPageState();
+  State<PinPage> createState() => _PinPageState();
 }
 
-class _RestaurantPinPageState extends State<RestaurantPinPage> {
+class _PinPageState extends State<PinPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late FocusNode _focusNode;
   late TextEditingController _textEditingController;
@@ -56,37 +58,56 @@ class _RestaurantPinPageState extends State<RestaurantPinPage> {
                 },
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 16, horizontal: 30),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * .6,
-                    child: RestaurantPinTextFormField(
-                      formKey: _formKey,
-                      focusNode: _focusNode,
-                      textEditingController: _textEditingController,
+            Builder(
+              builder: (context) {
+                final RestaurantState _state = context.watch<RestaurantBloc>().state;
+                if (_state is RestaurantFetching) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FixedLoadingWidget(
+                        indicator: BallSpinFadeLoaderIndicator(),
+                        size: 55.0,
+                        color: const Color.fromRGBO(255, 255, 255, .50),
+                      ),
+                    ],
+                  );
+                }
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding:
+                          const EdgeInsets.symmetric(vertical: 16, horizontal: 30),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * .6,
+                        child: RestaurantPinTextFormField(
+                          formKey: _formKey,
+                          focusNode: _focusNode,
+                          textEditingController: _textEditingController,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * .6,
-                  child: RoundedButton(
-                    text: "Submit",
-                    onPressed: () {
-                      if (!_formKey.currentState!.validate()) {
-                        return;
-                      }
-                      FocusScope.of(context).unfocus();
-                      // TODO: Submit data to bloc _textEditingController.text.trim()
-                      BlocProvider.of<AppPageViewCubit>(context)
-                          .jumpToRestaurantPage();
-                    },
-                  ),
-                ),
-              ],
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * .6,
+                      child: RoundedButton(
+                        text: "Submit",
+                        onPressed: () {
+                          if (!_formKey.currentState!.validate()) {
+                            return;
+                          }
+                          BlocProvider.of<RestaurantBloc>(context).add(
+                            FetchRestaurant(
+                              _textEditingController.text.trim(),
+                            ),
+                          );
+                          FocusScope.of(context).unfocus();
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              }
             ),
           ],
         ),

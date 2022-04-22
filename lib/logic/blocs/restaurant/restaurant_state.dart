@@ -8,13 +8,6 @@ class RestaurantInitial extends RestaurantState {
   List<Object?> get props => [];
 }
 
-class RestaurantSubmitted extends RestaurantState {
-  final String pin;
-  RestaurantSubmitted(this.pin);
-  @override
-  List<Object?> get props => [pin];
-}
-
 class RestaurantFetching extends RestaurantState {
   final String pin;
   RestaurantFetching(this.pin);

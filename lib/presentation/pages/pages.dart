@@ -8,7 +8,7 @@ export 'home/home_page.dart';
 
 /// Screen allowing the user to type in the restaurants pin as an alternative
 /// to QR code.
-export 'restaurant_pin/restaurant_pin_page.dart';
+export 'home/pin_page.dart.';
 
 /// Home screen for the Restaurant. From here, the user can see a quick bio
 /// about the restaurant, choose sections of the menu to order from (or read the

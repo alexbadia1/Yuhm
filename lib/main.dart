@@ -19,9 +19,17 @@ class Yuhm extends StatelessWidget {
             ),
       ),
       home: Scaffold(
-        body: BlocProvider<AppPageViewCubit>(
-            create: (context) => AppPageViewCubit(),
-            child: const YuhmPageView()),
+        body: BlocProvider<RestaurantBloc>(
+          create: (c) => RestaurantBloc(),
+          child: Builder(builder: (_context) {
+            return BlocProvider<AppPageViewCubit>(
+              create: (_) => AppPageViewCubit(
+                BlocProvider.of<RestaurantBloc>(_context),
+              ),
+              child: const YuhmPageView(),
+            );
+          }),
+        ),
       ),
     );
   }
@@ -41,7 +49,7 @@ class YuhmPageView extends StatelessWidget {
       controller: BlocProvider.of<AppPageViewCubit>(context).pageController,
       children: [
         const HomePage(),
-        const RestaurantPinPage(),
+        const PinPage(),
         const QrScanner(),
         const RestaurantPage(),
         MenuPageView(

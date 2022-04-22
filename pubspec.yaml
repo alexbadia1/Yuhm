@@ -33,7 +33,8 @@ dependencies:
   # Local packages
   book_painter:
     path: book_painter
-
+  loading_fixed:
+    path: loading_fixed
   # State Management
   flutter_bloc: ^8.0.1
 

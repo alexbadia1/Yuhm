@@ -9,9 +9,18 @@ class AppPageViewCubit extends Cubit<AppPageViewState> {
   static const int qrScannerPageIndex = 2;
   static const int restaurantPageIndex = 3;
   static const int menuPageIndex = 4;
-  final PageController _pageController = PageController(initialPage: homePageIndex, keepPage: true);
+  final PageController _pageController =
+      PageController(initialPage: homePageIndex, keepPage: true);
+  late final StreamSubscription _subscription;
 
-  AppPageViewCubit() : super(AppPageViewPosition(homePageIndex));
+  AppPageViewCubit(RestaurantBloc restaurantBloc)
+      : super(AppPageViewPosition(homePageIndex)) {
+    _subscription = restaurantBloc.stream.listen((state) {
+      if (state is RestaurantFetchSuccess) {
+        jumpToRestaurantPage();
+      }
+    });
+  }
 
   void jumpToHomePage() {
     if (_pageController.hasClients) {
@@ -52,6 +61,7 @@ class AppPageViewCubit extends Cubit<AppPageViewState> {
 
   @override
   Future<void> close() {
+    _subscription.cancel();
     _pageController.dispose();
     return super.close();
   }

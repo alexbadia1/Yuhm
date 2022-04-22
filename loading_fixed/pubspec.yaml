@@ -1,6 +1,6 @@
-name: database_repository
-description: A new Flutter package project.
-version: 0.0.1
+name: loading_fixed
+description: This package contains a fix for the error when stop() is called after the dispose method. Additionally, this package only contains two of the loading progress indicators from the entire package.
+version: 1.0.2
 homepage:
 
 environment:
