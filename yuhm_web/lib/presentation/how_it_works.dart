@@ -30,7 +30,7 @@ class HowItWorks extends StatelessWidget {
                 ),
               ),
               bottomCenter: Container(
-                height: kfontSizeXBase * 16.5,
+                height: kfontSizeXSBase * 16.5,
                 alignment: Alignment.topLeft,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -65,7 +65,7 @@ class HowItWorks extends StatelessWidget {
                 ),
               ),
               bottomCenter: Container(
-                height: kfontSizeXBase * 16.5,
+                height: kfontSizeXSBase * 16.5,
                 alignment: Alignment.topLeft,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -99,7 +99,7 @@ class HowItWorks extends StatelessWidget {
                 ),
               ),
               bottomCenter: Container(
-                height: kfontSizeXBase * 16.5,
+                height: kfontSizeXSBase * 16.5,
                 alignment: Alignment.topLeft,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -146,7 +146,7 @@ class HowItWorks extends StatelessWidget {
         text: d + "\n\n",
         style: const TextStyle(
           color: Colors.black,
-          fontSize: kfontSizeXBase,
+          fontSize: kfontSizeXSBase,
         ),
       ));
     }

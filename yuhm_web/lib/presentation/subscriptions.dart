@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
@@ -9,9 +11,10 @@ class Subscriptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
+    final _flipCardHeight = kfontSizeBase * 33;
     return SliverToBoxAdapter(
       child: Container(
-        height: height,
+        height: kfontSizeBase * 40,
         width: double.infinity,
         color: kLandingPageColorSecondary,
         child: Column(
@@ -20,41 +23,111 @@ class Subscriptions extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 FlippingCard(
                   width: _width * .25,
-                  height: height * .7,
+                  height: _flipCardHeight,
                   mouseHoverEnabled: true,
-                  upFaceContents: Container(
-                    color: Colors.blueAccent,
-                    child: const SizedBox(),
+                  upFaceContents: FaceUpCard(
+                    title: "No Cost Plan",
+                    linearGradient: kLinearGradientBlueGrey,
+                    faceUpCardSections: const [
+                      FaceUpCardSection(
+                        title: "Business",
+                        items: [
+                          "Basic Chef Dashboard Functionality",
+                          "10k orders/day (Hard Limit)",
+                          "Client Support (Businees Days Only)"
+                        ],
+                      ),
+                      FaceUpCardSection(
+                        title: "Data",
+                        items: [
+                          "No Data Aggregation Tools",
+                          "No Data Analytics Tools",
+                          "No AI Powered Business Intelligence",
+                        ],
+                      ),
+                    ],
                   ),
                   downFaceContents: Container(
-                    color: Colors.green,
-                    child: const SizedBox(),
+                    child: FaceDownCard(
+                      title: "No Costs",
+                      description: "No Hidden Fees",
+                      buttonTitle: "Sign Up",
+                      price: "\$0/month",
+                      onPressed: () {
+                        print("\$100");
+                      },
+                    ),
+                    decoration:
+                        BoxDecoration(gradient: kLinearGradientBlueGrey),
                   ),
                 ),
                 FlippingCard(
                   width: _width * .25,
-                  height: height * .7,
+                  height:_flipCardHeight,
                   mouseHoverEnabled: true,
-                  upFaceContents: Container(
-                    color: Colors.blueAccent,
-                    child: const SizedBox(),
+                  upFaceContents: FaceUpCard(
+                    title: "Spark Plan",
+                    linearGradient: kLinearGradientBlue,
+                    faceUpCardSections: const [
+                      FaceUpCardSection(
+                        title: "Business",
+                        items: [
+                          "Full Chef Dashboard Functionality",
+                          "+100k orders/day (Pay as you go)",
+                          "24/7 On Call Client Support"
+                        ],
+                      ),
+                      FaceUpCardSection(
+                        title: "Data",
+                        items: [
+                          "Limited Data Aggregation Tools Access",
+                          "Limited Data Analytics Tools Access",
+                          "Limited AI Powered Business Intelligence Access",
+                        ],
+                      ),
+                    ],
                   ),
                   downFaceContents: Container(
-                    color: Colors.green,
-                    child: const SizedBox(),
+                    child: FaceDownCard(
+                      title: "Pay As You Go",
+                      description: "Starting At",
+                      buttonTitle: "Sign Up",
+                      price: "\$60/month",
+                      onPressed: () {
+                        print("\$100");
+                      },
+                    ),
+                    decoration: BoxDecoration(gradient: kLinearGradientBlue),
                   ),
                 ),
                 FlippingCard(
                   width: _width * .25,
-                  height: height * .7,
+                  height: _flipCardHeight,
                   mouseHoverEnabled: true,
-                  upFaceContents: Container(
-                    color: Colors.blueAccent,
-                    child: const SizedBox(),
+                  upFaceContents: FaceUpCard(
+                    title: "Blaze Plan",
+                    linearGradient: kLinearGradientDeepOrange,
+                    faceUpCardSections: const [
+                      FaceUpCardSection(
+                        title: "Business",
+                        items: [
+                          "Unique Feature Request Priority",
+                          "+100M orders/day (unlimited scale)",
+                          "On Demand Prioritized Client Support"
+                        ],
+                      ),
+                      FaceUpCardSection(
+                        title: "Data",
+                        items: [
+                          "Full Data Aggregation Tools Access",
+                          "Full Data Analytics Tools Access",
+                          "Full AI Powered Business Intelligence Access",
+                        ],
+                      ),
+                    ],
                   ),
                   downFaceContents: Container(
                     child: FaceDownCard(
@@ -62,14 +135,147 @@ class Subscriptions extends StatelessWidget {
                       description: "Starting At",
                       buttonTitle: "Sign Up",
                       price: "\$100/month",
-                      onPressed: () {},
+                      onPressed: () {
+                        print("\$100");
+                      },
                     ),
+                    decoration:
+                        BoxDecoration(gradient: kLinearGradientDeepOrange),
                   ),
                 ),
               ],
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class FaceUpCardSection extends StatelessWidget {
+  final String title;
+  final List<String> items;
+
+  const FaceUpCardSection({
+    Key? key,
+    required this.title,
+    required this.items,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final _width = MediaQuery.of(context).size.width;
+
+    final List<Widget> widgets = [];
+    widgets.add(const SizedBox(height: kfontSizeLarge));
+    widgets.add(
+      Text(
+        title,
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontSize: kfontSizeXLBase,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+        ),
+      ),
+    );
+    widgets.add(const SizedBox(height: kfontSizeLarge));
+    for (int i = 0; i < items.length; ++i) {
+      widgets.add(
+        Container(
+          padding: const EdgeInsets.only(
+            top: kfontSizeBase / 1.5,
+            bottom: kfontSizeBase / 1.5,
+          ),
+          width: _width * .2,
+          decoration: i == items.length - 1 ? _verticalBorders() : _topBorder(),
+          child: Text(
+            items[i],
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: kfontSizeBase,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      );
+    }
+    return Column(children: widgets);
+  }
+
+  BoxDecoration _verticalBorders() {
+    return const BoxDecoration(
+      border: Border(
+        top: BorderSide(
+          width: 1.25,
+          color: Color.fromRGBO(61, 61, 61, 1.0),
+        ),
+        bottom: BorderSide(
+          width: 1.25,
+          color: Color.fromRGBO(61, 61, 61, 1.0),
+        ),
+      ),
+    );
+  }
+
+  BoxDecoration _topBorder() {
+    return const BoxDecoration(
+      border: Border(
+        top: BorderSide(
+          width: 1.25,
+          color: Color.fromRGBO(61, 61, 61, 1.0),
+        ),
+      ),
+    );
+  }
+}
+
+class FaceUpCard extends StatelessWidget {
+  final String title;
+  final LinearGradient linearGradient;
+  final List<FaceUpCardSection> faceUpCardSections;
+
+  const FaceUpCard({
+    Key? key,
+    required this.title,
+    required this.linearGradient,
+    this.faceUpCardSections = const [],
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      color: Colors.white,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            height: kfontSizeLarge * 3,
+            width: double.infinity,
+            decoration: BoxDecoration(gradient: linearGradient),
+            child: Center(
+              child: Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: kfontSizeLarge,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: kfontSizeBase * 25,
+            child: FittedBox(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: faceUpCardSections,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -104,12 +310,12 @@ class FaceDownCard extends StatelessWidget {
               child: Text(
                 title ?? "[Title]",
                 style: const TextStyle(
-                  fontSize: kfontSizeXBase,
+                  fontSize: kfontSizeBase,
                   color: Colors.black,
                 ),
               ),
             ),
-            const SizedBox(height: kfontSizeBase * 2),
+            const SizedBox(height: kfontSizeBase),
             Visibility(
               visible: description != null,
               child: Text(
@@ -133,7 +339,7 @@ class FaceDownCard extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: kfontSizeBase * 2),
+        const SizedBox(height: kfontSizeBase * 4),
         TextButton(
           style: TextButton.styleFrom(
             primary: Colors.black,
@@ -181,6 +387,9 @@ class FlippingCard extends StatefulWidget {
   /// Allows user to manually flip
   final bool dragEnabled;
 
+  /// Allows user to flip the card by tapping on it
+  final bool tapEnabled;
+
   const FlippingCard(
       {Key? key,
       required this.width,
@@ -190,15 +399,19 @@ class FlippingCard extends StatefulWidget {
       this.onFlipToUpFace,
       this.onFlipToDownFace,
       this.dragEnabled = false,
+      this.tapEnabled = false,
       this.mouseHoverEnabled = false,
       this.yPerspective = .83})
       : assert(yPerspective >= 0),
         assert(yPerspective <= 1),
-        // Drag enable and Mouse
         assert(
-            mouseHoverEnabled == true && dragEnabled == false ||
+            (mouseHoverEnabled == true && dragEnabled == false) ||
                 mouseHoverEnabled == false && (dragEnabled || !dragEnabled),
-            "Drag Enabled and Mouse Hover cannot both be enabled!"),
+            "Mouse Hover and Enable Drag both cannot be true!"),
+        assert(
+            (mouseHoverEnabled == true && tapEnabled == false) ||
+                mouseHoverEnabled == false && (tapEnabled || !tapEnabled),
+            "Mouse Hover and Enable Tap both cannot be true!"),
         super(key: key);
 
   @override
@@ -269,74 +482,88 @@ class _FlippingCardState extends State<FlippingCard>
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        toggle();
-      },
-      onHorizontalDragUpdate: _onDragUpdate,
-      onHorizontalDragEnd: _onDragEnd,
-      child: AnimatedBuilder(
-        animation: _ac,
-        builder: (context, _) {
-          // Up Face should always start halfway rotated.
-          bool upFaceIsVisible = true;
-          double upFaceRotation = -3.14 * _ac.value;
-          if (_ac.value >= _ac.upperBound / 2) {
-            // Up Face is halfway rotated, now finish Down Face rotation.
-            upFaceRotation = -3.14 / 2 * _ac.upperBound;
+    return AnimatedBuilder(
+      animation: _ac,
+      builder: (context, _) {
+        // Up Face should always start halfway rotated.
+        bool upFaceIsVisible = true;
+        double upFaceRotation = -3.14 * _ac.value;
+        if (_ac.value >= _ac.upperBound / 2) {
+          // Up Face is halfway rotated, now finish Down Face rotation.
+          upFaceRotation = -3.14 / 2 * _ac.upperBound;
 
-            // Hide Up Face so the Container's edge doesn't show when halfway
-            // rotated.
-            upFaceIsVisible = false;
-          }
+          // Hide Up Face so the Container's edge doesn't show when halfway
+          // rotated.
+          upFaceIsVisible = false;
+        }
 
-          // Down Face should always start halfway rotated.
-          bool downFaceIsVisible = false;
-          double downFaceRotation = 3.14 / 2 * _ac.upperBound;
-          if (_ac.value >= _ac.upperBound / 2) {
-            // Up Face is halfway rotated, now finish Down Face rotation.
-            downFaceRotation = (3.14 * _ac.upperBound) - (3.14 * _ac.value);
+        // Down Face should always start halfway rotated.
+        bool downFaceIsVisible = false;
+        double downFaceRotation = 3.14 / 2 * _ac.upperBound;
+        if (_ac.value >= _ac.upperBound / 2) {
+          // Up Face is halfway rotated, now finish Down Face rotation.
+          downFaceRotation = (3.14 * _ac.upperBound) - (3.14 * _ac.value);
 
-            // Down face was hidden by stack anyway, so not necessary.
-            downFaceIsVisible = true;
-          }
-          return Stack(
-            children: [
-              Transform(
-                origin: Offset(widget.width / 2, 125),
-                transform: Matrix4.identity()
-                  ..setEntry(3, 2, .00075)
-                  ..rotateY(downFaceRotation),
-                alignment: Alignment.centerLeft,
-                child: Visibility(
-                  visible: downFaceIsVisible,
-                  child: SizedBox(
-                    height: widget.height,
-                    width: widget.width,
-                    child: widget.downFaceContents ?? const SizedBox(),
-                  ),
+          // Down face was hidden by stack anyway, so not necessary.
+          downFaceIsVisible = true;
+        }
+        return Stack(
+          children: [
+            Transform(
+              origin: Offset(widget.width / 2, 125),
+              transform: Matrix4.identity()
+                ..setEntry(3, 2, .00075)
+                ..rotateY(downFaceRotation),
+              alignment: Alignment.centerLeft,
+              child: Visibility(
+                visible: downFaceIsVisible,
+                child: Container(
+                  height: widget.height,
+                  width: widget.width,
+                  decoration: _boxDecoration(),
+                  child: widget.downFaceContents ?? const SizedBox(),
                 ),
               ),
-              Transform(
-                origin: Offset(widget.width / 2, 125),
-                transform: Matrix4.identity()
-                  ..setEntry(3, 2, .00075)
-                  ..rotateY(upFaceRotation),
-                alignment: Alignment.centerLeft,
-                child: Visibility(
-                  visible: upFaceIsVisible,
-                  child: SizedBox(
+            ),
+            Transform(
+              origin: Offset(widget.width / 2, 125),
+              transform: Matrix4.identity()
+                ..setEntry(3, 2, .00075)
+                ..rotateY(upFaceRotation),
+              alignment: Alignment.centerLeft,
+              child: Visibility(
+                visible: upFaceIsVisible,
+                child: Container(
                     height: widget.height,
                     width: widget.width,
-                    child: widget.upFaceContents ?? const SizedBox(),
-                  ),
+                    decoration: _boxDecoration(),
+                    child: widget.upFaceContents ?? const SizedBox()),
+              ),
+            ),
+            Visibility(
+              visible: widget.tapEnabled,
+              child: GestureDetector(
+                onTap: () {
+                  toggle();
+                },
+                onHorizontalDragUpdate: _onDragUpdate,
+                onHorizontalDragEnd: _onDragEnd,
+                child: Container(
+                  color: Colors.transparent,
+                  height: widget.height,
+                  width: widget.width,
+                  child: const SizedBox(),
                 ),
               ),
-              Visibility(
-                visible: widget.mouseHoverEnabled,
-                child: MouseRegion(
-                  onEnter: _onEnter,
-                  onExit: _onExit,
+            ),
+            Visibility(
+              visible: widget.mouseHoverEnabled,
+              child: MouseRegion(
+                opaque: false,
+                onEnter: _onEnter,
+                onExit: _onExit,
+                child: IgnorePointer(
+                  ignoring: true,
                   child: Container(
                     color: Colors.transparent,
                     height: widget.height,
@@ -344,11 +571,24 @@ class _FlippingCardState extends State<FlippingCard>
                     child: const SizedBox(),
                   ),
                 ),
-              )
-            ],
-          );
-        },
-      ),
+              ),
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  BoxDecoration _boxDecoration() {
+    return BoxDecoration(
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.5),
+          spreadRadius: 2.5,
+          blurRadius: 7,
+          offset: const Offset(0, 3), // changes position of shadow
+        ),
+      ],
     );
   }
 }
