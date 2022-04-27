@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yuhm_web/logic/blocs/restaurant_bloc.dart';
 import 'package:yuhm_web/logic/cubits/appbar_cubit.dart';
 
 import 'presentation/landing_page.dart';
@@ -16,11 +17,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BlocProvider<AppbarCubit>(
-        create: (_) => AppbarCubit(),
-        child: const Padding(
-          padding: EdgeInsets.all(16.0),
-          child: LandingPage(),
+      home: BlocProvider<RestaurantBloc>(
+        create: (_) => RestaurantBloc(),
+        child: BlocProvider<AppbarCubit>(
+          create: (_) => AppbarCubit(),
+          child: const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: LandingPage(),
+          ),
         ),
       ),
     );

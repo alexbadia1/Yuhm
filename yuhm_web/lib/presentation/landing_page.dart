@@ -1,10 +1,10 @@
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yuhm_web/logic/cubits/appbar_cubit.dart';
 import 'package:yuhm_web/presentation/how_it_works.dart';
+import 'package:yuhm_web/presentation/sign_up.dart';
 import 'package:yuhm_web/presentation/subscriptions.dart';
 import 'package:yuhm_web/presentation/welcome.dart';
 
@@ -192,6 +192,9 @@ class LandingPage extends StatelessWidget {
                 color: kLandingPageColorSecondary,
               ),
             ),
+
+            /// Sign Up Page
+            const SignUp()
           ],
         ),
       ),

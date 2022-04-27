@@ -51,7 +51,8 @@ class Welcome extends StatelessWidget {
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: kfontSizeXLarge,
-                                  color: Colors.white),
+                                  color: Colors.white,
+                              ),
                             ),
                           ),
                           const Padding(

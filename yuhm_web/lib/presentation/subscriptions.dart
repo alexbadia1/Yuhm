@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
@@ -10,8 +8,9 @@ class Subscriptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const _flipCardHeight = kfontSizeBase * 33;
     final _width = MediaQuery.of(context).size.width;
-    final _flipCardHeight = kfontSizeBase * 33;
+
     return SliverToBoxAdapter(
       child: Container(
         height: kfontSizeBase * 40,
