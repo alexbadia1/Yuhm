@@ -8,18 +8,21 @@ part 'restaurant_event.dart';
 part 'restaurant_state.dart';
 
 class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
-  RestaurantBloc() : super(RestaurantInitial(Restaurant.nullConstructor())) {
-    on<SubmitRestaurant>((event, emit) => _fetchRestaurant(emit, event.restaurant));
-    on<UpdateRestaurant>((event, emit) => _updateRestaurant(emit, event.restaurant),
-    );
+  RestaurantBloc() : super(RestaurantInitial(Restaurant.nullConstructor(id: "Restaurant Id ${UniqueKey().hashCode.toString()}"))) {
+    on<SubmitRestaurant>(
+        (event, emit) => _fetchRestaurant(emit, event.restaurant));
+    on<UpdateRestaurant>(
+        (event, emit) => _updateRestaurant(emit, event.restaurant));
   }
 
-  void _fetchRestaurant(Emitter<RestaurantState> emit, Restaurant restaurant) async {
+  void _fetchRestaurant(
+      Emitter<RestaurantState> emit, Restaurant restaurant) async {
     emit(RestaurantSubmitting(restaurant));
 
     // Send POST request to database
     await Future.delayed(const Duration(milliseconds: 1000));
 
+    emit(RestaurantSubmitSuccess(restaurant));
   }
 
   void _updateRestaurant(Emitter<RestaurantState> emit, Restaurant r) {

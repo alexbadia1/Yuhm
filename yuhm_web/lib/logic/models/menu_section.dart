@@ -10,6 +10,8 @@ class MenuSection extends Equatable {
   /// Brief details about what's in this particular section of the menu.
   final String? description;
 
+  static const String indent = "\t\t\t\t";
+
   const MenuSection({
     this.id,
     required this.name,
@@ -32,11 +34,11 @@ class MenuSection extends Equatable {
 
   @override
   String toString() {
-    return "MenuSection {\n"
-        "\tDoc Id: $id\n"
-        "\tName: $name\n"
-        "\tDescription: $description\n"
-        "}\n";
+    return '\n${indent}Menu Section {\n'
+        '$indent\t"Id": $id,\n'
+        '$indent\t"Name": $name,\n'
+        '$indent\t"Description": $description,\n'
+        '$indent}';
   }
 
   @override

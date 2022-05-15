@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yuhm_web/logic/cubits/appbar_cubit.dart';
+import 'package:yuhm_web/presentation/footer.dart';
 import 'package:yuhm_web/presentation/how_it_works.dart';
 import 'package:yuhm_web/presentation/sign_up.dart';
 import 'package:yuhm_web/presentation/subscriptions.dart';
@@ -192,9 +193,8 @@ class LandingPage extends StatelessWidget {
                 color: kLandingPageColorSecondary,
               ),
             ),
-
-            /// Sign Up Page
-            const SignUp()
+            const SignUp(),
+            Footer(height: sectionHeight * 1/3),
           ],
         ),
       ),

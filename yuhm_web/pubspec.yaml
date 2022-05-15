@@ -36,6 +36,12 @@ dependencies:
 
   # Form
   file_picker: ^4.5.1
+  progress_indicators: ^1.0.0
+
+  # Auth
+  qr_flutter: ^4.0.0
+  crclib: ^3.0.0
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

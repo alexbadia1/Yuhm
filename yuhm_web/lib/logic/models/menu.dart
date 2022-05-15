@@ -1,17 +1,21 @@
+import 'package:equatable/equatable.dart';
+
 import 'menu_page.dart';
 
-class Menu {
+class Menu extends Equatable {
   /// Database PK.
   final String? id;
 
   /// Restaurant might have a "main" menu and a "wine" or "cocktail" menu.
-  final String? name;
+  final String name;
 
   /// Brief details/summary about the menu.
-  final String? description;
+  final String description;
 
   /// Images of each page of the menu.
   final List<MenuPage> menuPages;
+
+  static const String indent = "\t\t";
 
   const Menu({
     this.id,
@@ -20,7 +24,7 @@ class Menu {
     required this.menuPages,
   });
 
-  const Menu.nullConstructor({
+  Menu.nullConstructor({
     this.id,
     this.name = "",
     this.description = "",
@@ -42,11 +46,14 @@ class Menu {
 
   @override
   String toString() {
-    return "Menu {\n"
-        "\tDoc Id: $id\n"
-        "\tName: $name\n"
-        "\tDescription: $description\n"
-        "\tMenuPages: ${menuPages.toString()}\n"
-        "}\n";
+    return '\n${indent}Menu {\n'
+        '$indent\t"Doc Id": $id,\n'
+        '$indent\t"Name": $name,\n'
+        '$indent\t"Description": $description,\n'
+        '$indent\t"MenuPages": ${menuPages.toString()},\n'
+        '$indent}';
   }
+
+  @override
+  List<Object?> get props => [id, name, description, menuPages];
 }
